@@ -305,10 +305,12 @@ for i=1:n_datasets
    %pack         % old command that is now deprecated
   
    % Thinning; spatial subsampling
-   allvals=NaN*ones(spatial_resolution);
-   allvals(1:thin:end,1:thin:end)=sst(1:thin:end,1:thin:end); 
-   message2(['*** Thinning: every ' thin 'th row and column is filled with real values']);
-   sst=allvals;
+   if i > 1 % skip ostia, already subsampled by thin=5 via generate_oi_input_data.m
+      allvals=NaN*ones(spatial_resolution);
+      allvals(1:thin:end,1:thin:end)=sst(1:thin:end,1:thin:end); 
+      message2(['*** Thinning: every ' thin 'th row and column is filled with real values']);
+      sst=allvals;
+   end
 
    % ***20250702_MT/Andy***
    % An analysis system analyses anomalies. The difference between
