@@ -320,7 +320,7 @@ for i=1:n_datasets
 
    % Calculate anomalies (Delta SST from yesterday).
    % Update bias correction (Maturi et al. 2017–Fig1.process flowchart)
-   obs=sst+bias-sst_analysis; % KEY
+   obs=sst+bias-sst_analysis; % KEY; Any arithmetic involving NaN results in NaN
    % obs will be NaN if sst is NaN regardless of the values of sst_analysis
    % [P1][Ch2][ME][KEY]: Unit of obs,sst,bias,sst_analysis is �C.
    % obs = L3 SST + L3 Bias - L4 SST (reference: previous day's
@@ -347,7 +347,7 @@ for i=1:n_datasets
    % Quality Control–flagging.
    % Replace NaN with bad_val.
    bad=find(isnan(obs));
-   obs(bad)=bad_val; % -999.
+   obs(bad)=bad_val; % replace NaN with -999.
    cov(bad)=bad_val;
    bad=find(stdvals==0);
    obs(bad)=bad_val;
