@@ -20,6 +20,8 @@ current_sec=$start_sec
 prev_job=""
 
 LOGDIR="/gpfs01/v2/Q9157/momoe/geo_polar_blended_sst/Linux_JCUHPC/blended_home/Logs"
+dir_name=$(basename "$PWD")
+suffix=${dir_name#Software_}
 
 while [ "$current_sec" -le "$end_sec" ]; do
 
@@ -28,7 +30,7 @@ while [ "$current_sec" -le "$end_sec" ]; do
 YEAR=$(date -d "$tar_date" +%Y)
     DOY=$(date -d "$tar_date" +%j)
 
-    logfile="${LOGDIR}/generate_oi_sst_${YEAR}_${DOY}.log"
+    logfile="${LOGDIR}/generate_oi_sst_${YEAR}_${DOY}_${suffix}.log"
 
     echo "Submitting $tar_date (YEAR=$YEAR DOY=$DOY)"
 
@@ -37,7 +39,7 @@ YEAR=$(date -d "$tar_date" +%Y)
         jobid=$(qsub \
             -v tar_date=$tar_date,YEAR=$YEAR,DOY=$DOY \
             -o $logfile \
-            -N generate_sst${YEAR}_${DOY} \
+            -N ${suffix}geneSST${YEAR}_${DOY} \
             run_generate_oi_sst.pbs)
 
     else
@@ -46,7 +48,7 @@ YEAR=$(date -d "$tar_date" +%Y)
             -W depend=afterok:$prev_job \
             -v tar_date=$tar_date,YEAR=$YEAR,DOY=$DOY \
             -o $logfile \
-            -N generate_sst${YEAR}_${DOY} \
+            -N ${suffix}geneSST${YEAR}_${DOY} \
             run_generate_oi_sst.pbs)
 
     fi
