@@ -366,7 +366,7 @@ for i=1:n_datasets
    % [P1][Ch2][ANDY/SCOTT/ME][Q]: add some codes here if we want to know which L3C SST (platform) is available?
    full_obs(ok)=1; % full_obs: a binary mask (1=valid obs and 0=no/bad data), overwrite every time
    % to know whether a 0.05ºx0.05º pixel had any valid observation from at least one satellite
-
+   % [P1][Ch1][ME][HYP]: full_obs includes ostia
                   message2(['*** DEBUG007'])
 end % this for loop is all for creating obs_list and cov_list and full_obs, parameters for the function mult_groupb_new
    message2(['*** DEBUG019'])
