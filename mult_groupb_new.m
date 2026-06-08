@@ -13,7 +13,7 @@
 
 function [r1,r2,r3,r4,r5,r6] = mult_groupb_new( sc, st_dense, varargin );
 
-if (length(sc)==1),
+if (length(sc)==1), % Momoe: not our case, length(sc)==13
   % Regular call to mult_fields6_newest, change nothing
   comstr = '';
   if (nargout > 0),
@@ -34,14 +34,15 @@ end;
 % Below are our case. break domain into overlapping tiles > solve each tile
 % separately > stitch results back together
 % Get parameter positions
+% Momoe: TNT: debugging and printing to see what is going on and how it is being used?
 i_nf = 1;
-num_fields = eval(['varargin{' num2str(i_nf) '}(1)']);
-i_nw = i_nf+1+4*num_fields;
-i_mm = i_nw+1+eval(['varargin{' num2str(i_nw) '}']);
-num_meas = size(eval(['varargin{' num2str(i_mm) '}']),1);
-i_re = i_mm+1+2*num_meas;
-eval(['opts = varargin{' num2str(i_re+2) '};']);
-meas_siz = eval(['size(varargin{' num2str(i_mm+1) '})']);
+num_fields = eval(['varargin{' num2str(i_nf) '}(1)']); %=1
+i_nw = i_nf+1+4*num_fields; %=6
+i_mm = i_nw+1+eval(['varargin{' num2str(i_nw) '}']); %=7
+num_meas = size(eval(['varargin{' num2str(i_mm) '}']),1); %=10
+i_re = i_mm+1+2*num_meas; %=28
+eval(['opts = varargin{' num2str(i_re+2) '};']); %=1
+meas_siz = eval(['size(varargin{' num2str(i_mm+1) '})']); %=10
 
 % Decode decomposition request
 if length(sc)<13

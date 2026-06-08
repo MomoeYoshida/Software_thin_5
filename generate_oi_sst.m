@@ -303,7 +303,8 @@ for i=1:n_datasets
    end
    clear gridcount only_one only_two
    %pack         % old command that is now deprecated
-  
+
+   %******************************************************************************************    
    % Thinning; spatial subsampling
    if i > 1 % skip ostia, already subsampled by thin=5 via generate_oi_input_data.m
       allvals=NaN*ones(spatial_resolution);
@@ -311,6 +312,7 @@ for i=1:n_datasets
       message2(['*** Thinning: every ' thin 'th row and column is filled with real values']);
       sst=allvals;
    end
+   %******************************************************************************************
 
    % ***20250702_MT/Andy***
    % An analysis system analyses anomalies. The difference between
@@ -449,9 +451,9 @@ for i=1:length(oi_corr_parm_001) % [8, 16, 32]
    % oi_nweight: 0
    % measurement_model: a column vector of size n_datasets(=19 -> 10) × 1 where every entry is the number 1
    % obs_list: multiple satellite observation deviations, a single long
-   % character, the measurement values
+   % character, the measurement values, 10
    % cov_list: observation error covariance, controls how strongly observations influence the solution.
-   % large/small error >>> weak/strong weight
+   % large/small error >>> weak/strong weight, 10
    % string ('obs_001,obs_002,obs_003,...,obs_019,')? Aren't they values
    % assigned at line240?
    % oi_oceans_coupling: .mat file in data file
