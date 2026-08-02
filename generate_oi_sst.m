@@ -305,7 +305,7 @@ for i=1:n_datasets
    %pack         % old command that is now deprecated
 
    %******************************************************************************************    
-   % Thinning; spatial subsampling
+   % Thinning; spatial subsampling [P1] I think you can remove if condition to thin ostia more too, at the moment sst is available every 5x5 pixels because ostia if gap-free l4 product!
    if i > 1 % skip ostia, already subsampled by thin=5 via generate_oi_input_data.m
       allvals=NaN*ones(spatial_resolution);
       allvals(1:thin:end,1:thin:end)=sst(1:thin:end,1:thin:end); 
